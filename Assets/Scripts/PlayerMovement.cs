@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		transform.Rotate(0, 0, -Input.GetAxisRaw("Horizontal") * 100f * Time.deltaTime);
+		transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * 100f * Time.deltaTime);
 
 		Network.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 

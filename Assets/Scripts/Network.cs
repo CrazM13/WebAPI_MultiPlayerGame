@@ -8,8 +8,8 @@ public class Network : MonoBehaviour {
 
 	static SocketIOComponent socket;
 
-	public GameObject playerPrefab;
-	private Dictionary<string, GameObject> players;
+	public Spawner spawner;
+	
 
 	void Start () {
 		socket = GetComponent<SocketIOComponent>();
@@ -18,28 +18,61 @@ public class Network : MonoBehaviour {
 		socket.On("talkback", OnTalkBack);
 		socket.On("spawn", OnSpawn);
 		socket.On("move", OnMove);
+		socket.On("disconnected", OnDisconnect);
+		socket.On("register", OnRegister);
+		socket.On("updatePosition", OnUpdatePosition);
+	}
 
-		players = new Dictionary<string, GameObject>();
+	private void OnUpdatePosition(SocketIOEvent obj) {
+		Debug.Log("Updating Positons " + obj.data);
+
+		float v = float.Parse(obj.data["v"].ToString().Replace("\"", ""));
+		float h = float.Parse(obj.data["h"].ToString().Replace("\"", ""));
+
+		GameObject player = spawner.FindPlayer(obj.data["id"].ToString());
+		PlayerMovementNetwork playerMovement = player.GetComponent<PlayerMovementNetwork>();
+
+		playerMovement.v = v;
+		playerMovement.h = h;
+	}
+
+	private void OnRegister(SocketIOEvent obj) {
+		Debug.Log("Registered Player " + obj.data);
+		spawner.AddPlayer(obj.data["id"].ToString(), spawner.localPlayer);
+	}
+
+	private void OnDisconnect(SocketIOEvent obj) {
+		Debug.Log("Player Disconnected " + obj.data);
+
+		string id = obj.data["id"].ToString();
+
+		spawner.RemovePlayer(id);
 	}
 
 	private void OnMove(SocketIOEvent obj) {
-		Debug.Log("Player Moving " + obj.data);
+		//Debug.Log("Player Moving " + obj.data);
 
 		string id = obj.data["id"].ToString();
 
 		float v = float.Parse(obj.data["v"].ToString().Replace("\"", ""));
 		float h = float.Parse(obj.data["h"].ToString().Replace("\"", ""));
 
-		players[id].GetComponent<PlayerMovementNetwork>().v = v;
-		players[id].GetComponent<PlayerMovementNetwork>().h = h;
+		GameObject player = spawner.FindPlayer(id);
+		PlayerMovementNetwork playerMovement = player.GetComponent<PlayerMovementNetwork>();
+
+		playerMovement.v = v;
+		playerMovement.h = h;
+
+
+
 	}
 
 	private void OnSpawn(SocketIOEvent obj) {
 		Debug.Log("Player Spawned With ID " + obj.data);
-		GameObject player = Instantiate(playerPrefab);
 
-		players.Add(obj.data["id"].ToString(), player);
-		Debug.Log(players.Count);
+		GameObject player = spawner.SpawnPlayer(obj.data["id"].ToString());
+
+		// Spawn Existing Players
 	}
 
 	private void OnTalkBack(SocketIOEvent obj) {
@@ -55,6 +88,8 @@ public class Network : MonoBehaviour {
 	public static void Move(float currentPosV, float currentPosH) {
 		//Debug.Log("Send Position To Server " + VectorToJson(currentPos));
 		socket.Emit("move", new JSONObject(VectorToJson(currentPosV, currentPosH)));
+
+
 	}
 
 	public static string VectorToJson(float dirV, float dirH) {

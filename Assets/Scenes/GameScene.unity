@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 253311560}
   - component: {fileID: 253311561}
   - component: {fileID: 253311562}
+  - component: {fileID: 253311563}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -173,6 +174,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1137081262867752, guid: b69a9f911c6005848a57b1cc2a206459,
     type: 2}
+  spawner: {fileID: 253311563}
+--- !u!114 &253311563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 253311559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f69896e363f3d142a8e7478acaad76e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPlayer: {fileID: 847427750}
+  playerPrefab: {fileID: 1137081262867752, guid: b69a9f911c6005848a57b1cc2a206459,
+    type: 2}
+  socket: {fileID: 253311561}
 --- !u!1 &626055764
 GameObject:
   m_ObjectHideFlags: 0
