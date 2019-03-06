@@ -11,12 +11,12 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * 100f * Time.deltaTime);
+		transform.Rotate(0, 0, -Input.GetAxisRaw("Horizontal") * 100f * Time.deltaTime);
 
-		Network.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+		Network.Move(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"));
 
-		if (Input.GetAxis("Vertical") > 0) {
-			rb2d.AddForce(transform.up * 3f * Input.GetAxis("Vertical"));
+		if (Input.GetAxisRaw("Vertical") > 0) {
+			rb2d.AddForce(transform.up * 3f * Input.GetAxisRaw("Vertical"));
 		} else {
 			rb2d.velocity = Vector2.zero;
 		}

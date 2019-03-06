@@ -16,7 +16,7 @@ public class PlayerMovementNetwork : MonoBehaviour {
 	public void FixedUpdate() {
 		transform.Rotate(0, 0, -h * 100f * Time.deltaTime);
 
-		Network.Move(v, h);
+		//Network.Move(v, h);
 
 		if (v > 0) {
 			rb2d.AddForce(transform.up * 3f * v);

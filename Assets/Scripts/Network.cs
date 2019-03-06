@@ -21,19 +21,25 @@ public class Network : MonoBehaviour {
 		socket.On("disconnected", OnDisconnect);
 		socket.On("register", OnRegister);
 		socket.On("updatePosition", OnUpdatePosition);
+		socket.On("requestPosition", OnRequestPosition);
+	}
+
+	private void OnRequestPosition(SocketIOEvent obj) {
+		socket.Emit("updatePosition", PosToJson(spawner.localPlayer.transform.position, spawner.localPlayer.transform.rotation.eulerAngles.z));
 	}
 
 	private void OnUpdatePosition(SocketIOEvent obj) {
 		Debug.Log("Updating Positons " + obj.data);
 
-		float v = float.Parse(obj.data["v"].ToString().Replace("\"", ""));
-		float h = float.Parse(obj.data["h"].ToString().Replace("\"", ""));
+		//float v = float.Parse(obj.data["v"].ToString().Replace("\"", ""));
+		//float h = float.Parse(obj.data["h"].ToString().Replace("\"", ""));
+		Vector3 position = MakePositionFromJson(obj);
+		float rotation = obj.data["rotZ"].n;
 
-		GameObject player = spawner.FindPlayer(obj.data["id"].ToString());
-		PlayerMovementNetwork playerMovement = player.GetComponent<PlayerMovementNetwork>();
+		GameObject player = spawner.FindPlayer(obj.data["id"].str);
 
-		playerMovement.v = v;
-		playerMovement.h = h;
+		player.transform.position = position;
+		player.transform.eulerAngles = new Vector3(0, 0, rotation);
 	}
 
 	private void OnRegister(SocketIOEvent obj) {
@@ -94,6 +100,19 @@ public class Network : MonoBehaviour {
 
 	public static string VectorToJson(float dirV, float dirH) {
 		return string.Format(@"{{""v"":""{0}"",""h"":""{1}""}}", dirV, dirH);
+	}
+
+	public static JSONObject PosToJson(Vector3 pos, float rotZ) {
+		JSONObject jPos = new JSONObject(JSONObject.Type.OBJECT);
+		jPos.AddField("x", pos.x);
+		jPos.AddField("y", pos.y);
+		jPos.AddField("z", pos.z);
+		jPos.AddField("rotZ", rotZ);
+		return jPos;
+	}
+
+	public static Vector3 MakePositionFromJson(SocketIOEvent e) {
+		return new Vector3(e.data["x"].n, e.data["y"].n, e.data["z"].n);
 	}
 
 }
