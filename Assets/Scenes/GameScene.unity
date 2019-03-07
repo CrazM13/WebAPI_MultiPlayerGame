@@ -113,83 +113,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &253311559
-GameObject:
+--- !u!1001 &518193083
+Prefab:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 253311560}
-  - component: {fileID: 253311561}
-  - component: {fileID: 253311562}
-  - component: {fileID: 253311563}
-  m_Layer: 0
-  m_Name: Network
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &253311560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 253311559}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &253311561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 253311559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961346d7e16a445ff93777573e78efd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url: ws://127.0.0.1:5000/socket.io/?EIO=4&transport=websocket
-  autoConnect: 1
-  reconnectDelay: 5
-  ackExpirationTime: 1800
-  pingInterval: 25
-  pingTimeout: 60
---- !u!114 &253311562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 253311559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5164e6a9df3f3d445a594e19c6c0cd2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1137081262867752, guid: b69a9f911c6005848a57b1cc2a206459,
-    type: 2}
-  spawner: {fileID: 253311563}
---- !u!114 &253311563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 253311559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f69896e363f3d142a8e7478acaad76e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPlayer: {fileID: 847427750}
-  playerPrefab: {fileID: 1137081262867752, guid: b69a9f911c6005848a57b1cc2a206459,
-    type: 2}
-  socket: {fileID: 253311561}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985316471019380, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114725257432138616, guid: cefb4cf932a89a44c9f3ccb5f0629c0d,
+        type: 2}
+      propertyPath: localPlayer
+      value: 
+      objectReference: {fileID: 847427750}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cefb4cf932a89a44c9f3ccb5f0629c0d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &626055764
 GameObject:
   m_ObjectHideFlags: 0
